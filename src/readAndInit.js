@@ -1,15 +1,11 @@
 import * as tools from "./tools.js"
 
-
-export const validVT = ['+', '-', '*', '|', '(', ')', '^']; //文法中除大小写字母外的合法字符
-
-const isValid = tools.isValid(validVT); //检验终结符的函数
-
 export default function resloveGrammar() { // 读取文法并解析
     const originGrammar = document.getElementById('grammarBox').value;
     const grammarArr = originGrammar.split('\n').map(item => item.replace(/\s*/g, "")); //去除输入字符串中所有空格后的文法数组
+    let grammarOBJ = null;
     if (!isOG(grammarArr)) {
-        return null;
+        return grammarOBJ;
     }
     else {
         const unfoldGrammarArr = unfoldGrammar(grammarArr);
@@ -17,18 +13,21 @@ export default function resloveGrammar() { // 读取文法并解析
         const VNarr = getVNarr(grammarArr);
         const FIRSTVT = tools.create2DArray(VTarr.length, VNarr.length, false);
         const LASTVT = tools.create2DArray(VTarr.length, VNarr.length, false);
-        const grammarOBJ = {
-            unfoldGrammarArr: unfoldGrammarArr,
+        grammarOBJ = {
+            unfoldGrammarArr: unfoldGrammarArr, //展开的文法数组
             VTarr: VTarr,
             VNarr: VNarr,
             VTnum: VTarr.length,
             VNnum: VNarr.length,
             FIRSTVT: FIRSTVT,
             LASTVT: LASTVT,
+            findVTindex: tools.findIndexInArray(VTarr),
+            findVNindex: tools.findIndexInArray(VNarr),
+            }
         }
         return grammarOBJ;
     }
-}
+
 
 function isOG(grammarArr) { //判断是否是算符文法：任何产生式的右部都不含两个相继（并列）的非终结符
     try {
@@ -43,7 +42,10 @@ function isOG(grammarArr) { //判断是否是算符文法：任何产生式的�
                 if (tools.isUpperCase(zero) && tools.isUpperCase(index)) { //判断是否有连续的非终结符
                     throw new Error("Consecutive VN! The mistake lies in: " + zero + index);
                 }
-                if (!isValid(index)) {
+                if (tools.isValid(zero) && tools.isValid(index) && zero !== "|" && index !== "|") { //判断是否有连续的终结符
+                    throw new Error("Consecutive VT! The mistake lies in: " + zero + index);
+                }
+                if (!tools.isValid(index) && !tools.isUpperCase(index)) {
                     throw new Error("Illegal VT! The mistake lies in: " + index);
                 }
                 zero = index;
@@ -87,7 +89,7 @@ function unfoldGrammar(grammarArr) { //展开文法
         unfoldArr.add(gArr[0]);
         const gHead = gArr[0].slice(0, 3);
         for (let i = 1; i < gArr.length; i++) {
-            unfoldArr.add(gHead+gArr[i]);
+            unfoldArr.add(gHead + gArr[i]);
         }
     }
     return [...unfoldArr];
