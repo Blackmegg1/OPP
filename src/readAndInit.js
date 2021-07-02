@@ -11,14 +11,16 @@ export default function resloveGrammar() { // 读取文法并解析
         const unfoldGrammarArr = unfoldGrammar(grammarArr);
         const VTarr = getVTarr(grammarArr);
         const VNarr = getVNarr(grammarArr);
-        const FIRSTVT = tools.create2DArray(VTarr.length, VNarr.length, false);
-        const LASTVT = tools.create2DArray(VTarr.length, VNarr.length, false);
-        grammarOBJ = {
+        const FIRSTVT = tools.create2DArray(VNarr.length, VTarr.length, false);
+        const LASTVT = tools.create2DArray(VNarr.length, VTarr.length, false);
+        const PRT = tools.create2DArray(VTarr.length+1, VTarr.length+1, "*"); //(VTarr+1)*2
+        grammarOBJ = { //处理后的文法对象
             unfoldGrammarArr: unfoldGrammarArr, //展开的文法数组
             VTarr: VTarr,
             VNarr: VNarr,
             VTnum: VTarr.length,
             VNnum: VNarr.length,
+            PRT: PRT, //优先关系表
             FIRSTVT: FIRSTVT,
             LASTVT: LASTVT,
             findVTindex: tools.findIndexInArray(VTarr),
@@ -33,19 +35,19 @@ function isOG(grammarArr) { //判断是否是算符文法：任何产生式的�
     try {
         for (let grammar of grammarArr) {
             grammar = grammar.split("->");
-            if ((!tools.isUpperCase(grammar[0])) || (grammar[0].length !== 1)) { //判断产生式左部是否为单独的大写字母
+            if ((!tools.isVN(grammar[0])) || (grammar[0].length !== 1)) { //判断产生式左部是否为单独的大写字母
                 throw new Error("Wrong left! The mistake lies in: " + grammar.join("->"));
             }
             const left = grammar[1];
             let zero = "";
             for (let index of left) {
-                if (tools.isUpperCase(zero) && tools.isUpperCase(index)) { //判断是否有连续的非终结符
+                if (tools.isVN(zero) && tools.isVN(index)) { //判断是否有连续的非终结符
                     throw new Error("Consecutive VN! The mistake lies in: " + zero + index);
                 }
-                if (tools.isValid(zero) && tools.isValid(index) && zero !== "|" && index !== "|") { //判断是否有连续的终结符
+                if (tools.isVT(zero) && tools.isVT(index) && zero !== "|" && index !== "|") { //判断是否有连续的终结符
                     throw new Error("Consecutive VT! The mistake lies in: " + zero + index);
                 }
-                if (!tools.isValid(index) && !tools.isUpperCase(index)) {
+                if (!tools.isVT(index) && !tools.isVN(index)) {
                     throw new Error("Illegal VT! The mistake lies in: " + index);
                 }
                 zero = index;
@@ -58,7 +60,7 @@ function isOG(grammarArr) { //判断是否是算符文法：任何产生式的�
     return true;
 }
 
-function getVTarr(grammarArr) { //取得非终结符数组
+function getVNarr(grammarArr) { //取得非终结符数组
     let VTarr = new Set();
     for (let grammar of grammarArr) {
         grammar = grammar.split("->");
@@ -67,12 +69,12 @@ function getVTarr(grammarArr) { //取得非终结符数组
     return Array.from(VTarr);
 }
 
-function getVNarr(grammarArr) { //取得终结符数组
+function getVTarr(grammarArr) { //取得终结符数组
     let VNarr = new Set();
     for (let grammar of grammarArr) {
         grammar = grammar.split("->");
         for (const c of [...grammar[1]]) {
-            if (!tools.isUpperCase(c)) {
+            if (!tools.isVN(c)) {
                 VNarr.add(c);
             }
         }

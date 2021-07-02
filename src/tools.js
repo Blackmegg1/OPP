@@ -1,4 +1,4 @@
-export function isUpperCase(a) { //检验是否为大写字母
+export function isVN(a) { //检验是否为大写字母,！！！代码中直接用于检测是否是VN
     return /^[A-Z]+$/.test(a);
 }
 
@@ -6,8 +6,14 @@ export function isLowerCase(a) { //检验是否为小写字母
     return /^[a-z]+$/.test(a);
 }
 
-export const validVT = ['+', '-', '*', '|', '(', ')', '^']; //文法中除大小写字母外的合法字符
-export function isValid(a) { //检验是否为合法VT
+export const validVT = ['+', '-', '*', '|', '(', ')', '^', '#']; //文法中除大小写字母外的合法字符
+export function isVT(a) { //检验是否为合法VT
+    if(a === undefined) {
+        return false;
+    }
+    if(a.length !== 1) {
+        return false;
+    }
         return (isLowerCase(a)||validVT.includes(a));
 }
 
