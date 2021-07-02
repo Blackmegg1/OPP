@@ -10,7 +10,7 @@ export default function getFIRSTVT(grammarOBJ) { //grammarOBJ为readAndInit返�
         let topElement = stack.pop();
         ruleTwo(topElement, FIRSTVT, findVNindex, findVTindex, stack, unfoldGrammarArr);
     }
-    console.log(FIRSTVT); //打印了FIRSTVT，调试用
+    console.log("FIRSTVT:", FIRSTVT); //打印了FIRSTVT，调试用
 }
 
 
@@ -34,16 +34,15 @@ function ruleOne(g, FIRSTVT, findVNindex, findVTindex, stack) { //规则一：�
 
 function ruleTwo(g, FIRSTVT, findVNindex, findVTindex, stack, unfoldGrammarArr) { //规则二：形如 a属于Q , 若P->Q…… , 则a属于P
     const gArr = g.split("-"); //g为栈中元素，是索引对
-    let  [Q, a] = gArr;
+    let [Q, a] = gArr;
     Q = +Q;
     a = +a; //字符串转换为数字类型
     let P = -1;
     for (const gra of unfoldGrammarArr) {
-        if (findVTindex(gra[3]) === Q && gra[0]!==gra[3]) { //找到形如 P->Q…… 且 P!=Q防止产生循环
+        if (findVTindex(gra[3]) === Q && gra[0] !== gra[3]) { //找到形如 P->Q…… 且 P!=Q防止产生循环
             P = findVTindex(gra[0]);
             FIRSTVT[P][a] = true;
-            stack.push(tools.glue(P,a));
-            return true
+            stack.push(tools.glue(P, a));
         }
     }
 }
