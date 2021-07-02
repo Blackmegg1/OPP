@@ -1,7 +1,7 @@
 import * as tools from "./tools.js"
 
 export default function generatePRT(grammarOBJ) { //生成优先关系表
-    const { PRT, FIRSTVT, LASTVT, findVTindex, findVNindex, unfoldGrammarArr, VTnum } = grammarOBJ; //解构赋值
+    const { PRT, FIRSTVT, LASTVT, findVTindex, findVNindex, unfoldGrammarArr, VTnum, VTarr, VNarr } = grammarOBJ; //解构赋值
     for (const g of unfoldGrammarArr) {
         const gArr = g.split("->");
         const gRight = gArr[1]; //产生式右部
@@ -42,5 +42,6 @@ export default function generatePRT(grammarOBJ) { //生成优先关系表
     }
     PRT[VTnum][VTnum] = "=";
 
+    tools.decorate2DArray(PRT, [...VTarr, "#"], [...VTarr, "#"]);
     console.log("PRT:", PRT);
 }

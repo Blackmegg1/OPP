@@ -38,3 +38,11 @@ export function findIndexInArray(arr) { //在数组中找索引
 export function glue(left, right) { //合并后放入栈中
     return (left + "-" + right);
 }
+
+export function decorate2DArray(arrArr, colNameArr, rowNameArr) { //为二维数组加上行头和列头
+    arrArr.map((item,index) => {
+        item.unshift(rowNameArr[index]);
+    })
+    const newColNameArr = [" ",...colNameArr];
+    arrArr.unshift(newColNameArr);
+}

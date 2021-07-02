@@ -11,6 +11,5 @@ function main() {
     const grammarOBJ = readAndInit.default();
     FIRSTVT.default(grammarOBJ);
     LASTVT.default(grammarOBJ);
-    console.log(grammarOBJ.VTarr)
     PRT.default(grammarOBJ);
 }

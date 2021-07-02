@@ -1,7 +1,7 @@
 import * as tools from "./tools.js"
 
 export default function getFIRSTVT(grammarOBJ) { //grammarOBJ为readAndInit返回的文法对象
-    const { FIRSTVT, findVNindex, findVTindex, unfoldGrammarArr } = grammarOBJ;
+    const { VTarr, VNarr, FIRSTVT, findVNindex, findVTindex, unfoldGrammarArr } = grammarOBJ;
     const stack = [];
     for (const g of unfoldGrammarArr) {
         ruleOne(g, FIRSTVT, findVNindex, findVTindex, stack);
@@ -10,6 +10,7 @@ export default function getFIRSTVT(grammarOBJ) { //grammarOBJ为readAndInit返�
         let topElement = stack.pop();
         ruleTwo(topElement, FIRSTVT, findVNindex, stack, unfoldGrammarArr);
     }
+    tools.decorate2DArray(FIRSTVT, VTarr, VNarr);
     console.log("FIRSTVT:", FIRSTVT); //打印了FIRSTVT，调试用
 }
 

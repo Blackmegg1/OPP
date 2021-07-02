@@ -1,7 +1,7 @@
 import * as tools from './tools.js'
 
 export default function getLASTVT(grammarOBJ) {
-    const { LASTVT, findVNindex, findVTindex, unfoldGrammarArr } = grammarOBJ;
+    const { LASTVT, findVNindex, findVTindex, unfoldGrammarArr, VTarr, VNarr } = grammarOBJ;
     const stack = [];
     for (const g of unfoldGrammarArr) {
         ruleOne(g, LASTVT, findVNindex, findVTindex, stack);
@@ -10,6 +10,7 @@ export default function getLASTVT(grammarOBJ) {
         let topElement = stack.pop();
         ruleTwo(topElement, LASTVT, findVNindex, stack, unfoldGrammarArr);
     }
+    tools.decorate2DArray(LASTVT, VTarr, VNarr);
     console.log("LASTVT:", LASTVT); //打印了LASTVT，调试用
 }
 
@@ -38,7 +39,7 @@ function ruleTwo(g, LASTVT, findVNindex, stack, unfoldGrammarArr) { //规则二�
     let P = -1;
     for (const gra of unfoldGrammarArr) {
         const len = gra.length;
-        if (findVNindex(gra[len-1]) === Q && gra[0] !== gra[len-1]) { //找到形如 P->……Q 且 P!=Q防止产生循环
+        if (findVNindex(gra[len - 1]) === Q && gra[0] !== gra[len - 1]) { //找到形如 P->……Q 且 P!=Q防止产生循环
             P = findVNindex(gra[0]);
             LASTVT[P][a] = true;
             stack.push(tools.glue(P, a));
