@@ -10,8 +10,6 @@ export default function getFIRSTVT(grammarOBJ) { //grammarOBJ为readAndInit返�
         let topElement = stack.pop();
         ruleTwo(topElement, FIRSTVT, findVNindex, stack, unfoldGrammarArr);
     }
-    tools.decorate2DArray(FIRSTVT, VTarr, VNarr);
-    console.log("FIRSTVT:", FIRSTVT); //打印了FIRSTVT，调试用
 }
 
 

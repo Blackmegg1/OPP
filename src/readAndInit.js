@@ -25,6 +25,7 @@ export default function resloveGrammar() { // 读取文法并解析
             LASTVT: LASTVT,
             findVTindex: tools.findIndexInArray(VTarr),
             findVNindex: tools.findIndexInArray(VNarr),
+            history: {}, //处理历史
             }
         }
         return grammarOBJ;

@@ -10,8 +10,6 @@ export default function getLASTVT(grammarOBJ) {
         let topElement = stack.pop();
         ruleTwo(topElement, LASTVT, findVNindex, stack, unfoldGrammarArr);
     }
-    tools.decorate2DArray(LASTVT, VTarr, VNarr);
-    console.log("LASTVT:", LASTVT); //打印了LASTVT，调试用
 }
 
 function ruleOne(g, LASTVT, findVNindex, findVTindex, stack) { //规则一：形如P->…a 或P->…aQ 则a属于P

@@ -3,6 +3,7 @@ import * as FIRSTVT from './src/FIRSTVT.js'
 import * as LASTVT from './src/LASTVT.js'
 import * as PRT from './src/PRT.js'
 import * as tools from './src/tools.js'
+import * as reslove from './src/reslove.js'
 
 document.getElementById('grammarBox').placeholder = "除大小写字母外的合法字符：" + tools.validVT.join("  ");
 document.getElementById('submit').addEventListener('click', main);
@@ -12,4 +13,9 @@ function main() {
     FIRSTVT.default(grammarOBJ);
     LASTVT.default(grammarOBJ);
     PRT.default(grammarOBJ);
+    reslove.default(grammarOBJ, "i+(i*i)+i");
+    console.log(grammarOBJ);
 }
+
+//"i+i*i+i"
+//"i+(i*i)+i"

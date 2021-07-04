@@ -31,6 +31,9 @@ export function create2DArray(len1, len2, stuffing) { //创建二维数组
 
 export function findIndexInArray(arr) { //在数组中找索引
     return function(a) {
+        if(a === "#") {
+            return arr.length
+        }
         return arr.indexOf(a);
     }
 }
