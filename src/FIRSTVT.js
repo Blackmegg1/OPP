@@ -10,6 +10,7 @@ export default function getFIRSTVT(grammarOBJ) { //grammarOBJ为readAndInit返�
         let topElement = stack.pop();
         ruleTwo(topElement, FIRSTVT, findVNindex, stack, unfoldGrammarArr);
     }
+    grammarOBJ["FIRSTVTdata"] = tools.generateDataSource(grammarOBJ.FIRSTVT, grammarOBJ.VTarr, grammarOBJ.VNarr); //生成FIRSTVT集后再处理加入
 }
 
 

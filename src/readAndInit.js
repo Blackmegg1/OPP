@@ -13,7 +13,7 @@ export default function resloveGrammar() { // 读取文法并解析
         const VNarr = getVNarr(grammarArr);
         const FIRSTVT = tools.create2DArray(VNarr.length, VTarr.length, false);
         const LASTVT = tools.create2DArray(VNarr.length, VTarr.length, false);
-        const PRT = tools.create2DArray(VTarr.length+1, VTarr.length+1, "*"); //(VTarr+1)*2
+        const PRT = tools.create2DArray(VTarr.length + 1, VTarr.length + 1, "*"); //(VTarr+1)*2
         grammarOBJ = { //处理后的文法对象
             unfoldGrammarArr: unfoldGrammarArr, //展开的文法数组
             VTarr: VTarr,
@@ -26,10 +26,14 @@ export default function resloveGrammar() { // 读取文法并解析
             findVTindex: tools.findIndexInArray(VTarr),
             findVNindex: tools.findIndexInArray(VNarr),
             history: {}, //处理历史
-            }
         }
-        return grammarOBJ;
     }
+    grammarOBJ["VTColumns"] = tools.generateColumns(grammarOBJ.VTarr, grammarOBJ.VTarr); //供antd的Table组件展示FIRSTVT、LASTVT使用
+    grammarOBJ["PRTVT"] = [...grammarOBJ.VTarr, "#"]; //VT数组增加 #
+    grammarOBJ["PRTColumns"] = tools.generateColumns(grammarOBJ.PRTVT, grammarOBJ.PRTVT); //供antd的Table组件展示PRT使用，注意这里传递的是PRTVT
+    // grammarOBJ["HistoryColumns"] = tools.generateColumns(["步骤", "输入串", "符号栈", "动作"],) // 供antd的Table组件展示History使用
+    return grammarOBJ;
+}
 
 
 function isOG(grammarArr) { //判断是否是算符文法：任何产生式的右部都不含两个相继（并列）的非终结符

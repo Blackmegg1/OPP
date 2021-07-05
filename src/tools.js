@@ -8,13 +8,13 @@ export function isLowerCase(a) { //检验是否为小写字母
 
 export const validVT = ['+', '-', '*', '|', '(', ')', '^', '#']; //文法中除大小写字母外的合法字符
 export function isVT(a) { //检验是否为合法VT
-    if(a === undefined) {
+    if (a === undefined) {
         return false;
     }
-    if(a.length !== 1) {
+    if (a.length !== 1) {
         return false;
     }
-        return (isLowerCase(a)||validVT.includes(a));
+    return (isLowerCase(a) || validVT.includes(a));
 }
 
 export function create2DArray(len1, len2, stuffing) { //创建二维数组
@@ -30,8 +30,8 @@ export function create2DArray(len1, len2, stuffing) { //创建二维数组
 
 
 export function findIndexInArray(arr) { //在数组中找索引
-    return function(a) {
-        if(a === "#") {
+    return function (a) {
+        if (a === "#") {
             return arr.length
         }
         return arr.indexOf(a);
@@ -42,10 +42,43 @@ export function glue(left, right) { //合并后放入栈中
     return (left + "-" + right);
 }
 
-export function decorate2DArray(arrArr, colNameArr, rowNameArr) { //为二维数组加上行头和列头
-    arrArr.map((item,index) => {
+export function decorate2DArray(arrArr, colNameArr, rowNameArr) { //为二维数组加上行头和列头，调试使用，实际代码中没有使用到
+    arrArr.map((item, index) => {
         item.unshift(rowNameArr[index]);
     })
-    const newColNameArr = [" ",...colNameArr];
+    const newColNameArr = [" ", ...colNameArr];
     arrArr.unshift(newColNameArr);
+}
+
+export function generateColumns(arr, colNameArr) { //生成符合antd的Table组件要求的columns数组
+    let columns = [];
+    columns = arr.map((item, index) => {
+        const obj = {};
+        obj["title"] = item;
+        obj["dataIndex"] = colNameArr[index];
+        obj["key"] = item;
+        return obj;
+    });
+    columns.unshift({ //生成第一行
+        title: "  ",
+        dataIndex: "rowName",
+        key: -1,
+    })
+    return columns;
+}
+
+export function generateDataSource(arrArr, colNameArr, rowNameArr) { //根据二维数组生成符合antd的Table组件要求的dataSource
+    let dataSource = [];
+    dataSource = arrArr.map(
+        (item, index) => {
+            const obj = {};
+            obj["rowName"] = rowNameArr[index]; //生成第一行
+            obj.key = rowNameArr[index];
+            for (let i = 0; i < item.length; i++) {
+                obj[colNameArr[i]] = item[i];
+            }
+            return obj;
+        }
+    )
+    return dataSource;
 }

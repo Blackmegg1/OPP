@@ -48,10 +48,6 @@ export default function generatePRT(grammarOBJ) { //生成优先关系表
     }
     PRT[VTnum][VTnum] = "=";
 
-    // tools.decorate2DArray(PRT, [...VTarr, "#"], [...VTarr, "#"]);
-    // tools.decorate2DArray(FIRSTVT, VTarr, VNarr);
-    // tools.decorate2DArray(LASTVT, VTarr, VNarr); 
-    // console.log("FIRSTVT:", FIRSTVT); //打印了FIRSTVT，调试用
-    // console.log("LASTVT:", LASTVT); //打印了LASTVT，调试用
-    // console.log("PRT:", PRT);
+    grammarOBJ["PRTdata"] = tools.generateDataSource(grammarOBJ.PRT, grammarOBJ.PRTVT, grammarOBJ.PRTVT); 
+    //生成PRT后再处理加入，因为要考虑#，所以使用grammarOBJ.PRTVT而不是grammarOBJ.VTarr
 }
