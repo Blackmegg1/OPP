@@ -28,10 +28,10 @@ export default function resloveGrammar() { // 读取文法并解析
             history: {}, //处理历史
         }
     }
-    grammarOBJ["VTColumns"] = tools.generateColumns(grammarOBJ.VTarr, grammarOBJ.VTarr); //供antd的Table组件展示FIRSTVT、LASTVT使用
+    grammarOBJ["VTColumns"] = tools.generateColumns(grammarOBJ.VTarr); //供antd的Table组件展示FIRSTVT、LASTVT使用
     grammarOBJ["PRTVT"] = [...grammarOBJ.VTarr, "#"]; //VT数组增加 #
-    grammarOBJ["PRTColumns"] = tools.generateColumns(grammarOBJ.PRTVT, grammarOBJ.PRTVT); //供antd的Table组件展示PRT使用，注意这里传递的是PRTVT
-    // grammarOBJ["HistoryColumns"] = tools.generateColumns(["步骤", "输入串", "符号栈", "动作"],) // 供antd的Table组件展示History使用
+    grammarOBJ["PRTColumns"] = tools.generateColumns(grammarOBJ.PRTVT); //供antd的Table组件展示PRT使用，注意这里传递的是PRTVT
+    grammarOBJ["historyColumns"] = tools.generateColumns(["steps", "enterStr", "signStack", "moves"]) // 供antd的Table组件展示History使用
     return grammarOBJ;
 }
 

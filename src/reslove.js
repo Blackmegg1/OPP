@@ -1,13 +1,13 @@
 import * as tools from "./tools.js"
 
-export default function reslove(grammmarOBJ, enter) {
+export default function reslove(grammarOBJ, enter) {
     //历史数据记录
-    const steps = ["步骤"]; //步骤
-    const signStack = ["符号栈"]; //符号栈
-    const enterStr = ["输入串"]; //输入串
-    const moves = ["动作"]; //动作
+    const steps = []; //步骤
+    const signStack = []; //符号栈
+    const enterStr = []; //输入串
+    const moves = []; //动作
     //算法开始
-    const { PRT, findVTindex } = grammmarOBJ;
+    const { PRT, findVTindex } = grammarOBJ;
     const stack = [];
     const str = [...enter, "#"]; //在输入最后补上"#"
     let k = 0;
@@ -69,5 +69,6 @@ export default function reslove(grammmarOBJ, enter) {
         enterStr:enterStr,
         moves:moves,
     }
-    grammmarOBJ.history = history;
+    grammarOBJ.history = history;
+    grammarOBJ.historyData = tools.generateHistoryDataSource(history);
 }

@@ -50,20 +50,22 @@ export function decorate2DArray(arrArr, colNameArr, rowNameArr) { //为二维数
     arrArr.unshift(newColNameArr);
 }
 
-export function generateColumns(arr, colNameArr) { //生成符合antd的Table组件要求的columns数组
+export function generateColumns(arr) { //生成符合antd的Table组件要求的columns数组
     let columns = [];
-    columns = arr.map((item, index) => {
+    columns = arr.map(item => {
         const obj = {};
         obj["title"] = item;
-        obj["dataIndex"] = colNameArr[index];
+        obj["dataIndex"] = item;
         obj["key"] = item;
         return obj;
     });
-    columns.unshift({ //生成第一行
-        title: "  ",
-        dataIndex: "rowName",
-        key: -1,
-    })
+    if (columns[0].title !== "steps") { //historyColumns不需要添加第一行
+        columns.unshift({ //生成第一行
+            title: "  ",
+            dataIndex: "rowName",
+            key: -1,
+        })
+    }
     return columns;
 }
 
@@ -80,5 +82,20 @@ export function generateDataSource(arrArr, colNameArr, rowNameArr) { //根据二
             return obj;
         }
     )
+    return dataSource;
+}
+
+export function generateHistoryDataSource(history) {
+    let dataSource = [];
+    const len = history.moves.length;
+    for (let i = 0; i < len; i++) {
+        const obj = {};
+        obj.key = i;
+        obj.steps = history.steps[i];
+        obj.moves = history.moves[i];
+        obj.enterStr = history.enterStr[i];
+        obj.signStack = history.signStack[i];
+        dataSource.push(obj);
+    }
     return dataSource;
 }
