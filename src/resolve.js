@@ -1,6 +1,6 @@
 import * as tools from "./tools.js"
 
-export default function reslove(grammarOBJ, enter) {
+export default function resolve(grammarOBJ, enter) {
     //历史数据记录
     const steps = []; //步骤
     const signStack = []; //符号栈
