@@ -1,7 +1,7 @@
 import * as tools from './tools.js'
 
 export default function getLASTVT(grammarOBJ) {
-    const { LASTVT, findVNindex, findVTindex, unfoldGrammarArr, VTarr, VNarr } = grammarOBJ;
+    const { LASTVT, findVNindex, findVTindex, unfoldGrammarArr, } = grammarOBJ;
     const stack = [];
     for (const g of unfoldGrammarArr) {
         ruleOne(g, LASTVT, findVNindex, findVTindex, stack);
@@ -11,6 +11,7 @@ export default function getLASTVT(grammarOBJ) {
         ruleTwo(topElement, LASTVT, findVNindex, stack, unfoldGrammarArr);
     }
     grammarOBJ["LASTVTdata"] = tools.generateDataSource(grammarOBJ.LASTVT, grammarOBJ.VTarr, grammarOBJ.VNarr); //生成LASTVT集后再处理加入
+    return grammarOBJ;
 }
 
 function ruleOne(g, LASTVT, findVNindex, findVTindex, stack) { //规则一：形如P->…a 或P->…aQ 则a属于P

@@ -1,7 +1,7 @@
 import * as tools from "./tools.js"
 
 export default function generatePRT(grammarOBJ) { //生成优先关系表
-    const { PRT, FIRSTVT, LASTVT, findVTindex, findVNindex, unfoldGrammarArr, VTnum, VTarr, VNarr } = grammarOBJ; //解构赋值
+    const { PRT, FIRSTVT, LASTVT, findVTindex, findVNindex, unfoldGrammarArr, VTnum, VTarr} = grammarOBJ; //解构赋值
     for (const g of unfoldGrammarArr) {
         const gArr = g.split("->");
         const gRight = gArr[1]; //产生式右部
@@ -50,4 +50,5 @@ export default function generatePRT(grammarOBJ) { //生成优先关系表
 
     grammarOBJ["PRTdata"] = tools.generateDataSource(grammarOBJ.PRT, grammarOBJ.PRTVT, grammarOBJ.PRTVT); 
     //生成PRT后再处理加入，因为要考虑#，所以使用grammarOBJ.PRTVT而不是grammarOBJ.VTarr
+    return grammarOBJ;
 }

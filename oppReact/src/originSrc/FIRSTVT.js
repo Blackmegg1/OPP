@@ -1,7 +1,7 @@
 import * as tools from "./tools.js"
 
 export default function getFIRSTVT(grammarOBJ) { //grammarOBJ为readAndInit返回的文法对象
-    const { VTarr, VNarr, FIRSTVT, findVNindex, findVTindex, unfoldGrammarArr } = grammarOBJ;
+    const { FIRSTVT, findVNindex, findVTindex, unfoldGrammarArr } = grammarOBJ;
     const stack = [];
     for (const g of unfoldGrammarArr) {
         ruleOne(g, FIRSTVT, findVNindex, findVTindex, stack);
@@ -11,6 +11,7 @@ export default function getFIRSTVT(grammarOBJ) { //grammarOBJ为readAndInit返�
         ruleTwo(topElement, FIRSTVT, findVNindex, stack, unfoldGrammarArr);
     }
     grammarOBJ["FIRSTVTdata"] = tools.generateDataSource(grammarOBJ.FIRSTVT, grammarOBJ.VTarr, grammarOBJ.VNarr); //生成FIRSTVT集后再处理加入
+    return grammarOBJ;
 }
 
 

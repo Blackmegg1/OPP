@@ -42,13 +42,13 @@ export function glue(left, right) { //合并后放入栈中
     return (left + "-" + right);
 }
 
-export function decorate2DArray(arrArr, colNameArr, rowNameArr) { //为二维数组加上行头和列头，调试使用，实际代码中没有使用到
-    arrArr.map((item, index) => {
-        item.unshift(rowNameArr[index]);
-    })
-    const newColNameArr = [" ", ...colNameArr];
-    arrArr.unshift(newColNameArr);
-}
+// export function decorate2DArray(arrArr, colNameArr, rowNameArr) { //为二维数组加上行头和列头，调试使用，实际代码中没有使用到
+//     arrArr.map((item, index) => {
+//         item.unshift(rowNameArr[index]);
+//     })
+//     const newColNameArr = [" ", ...colNameArr];
+//     arrArr.unshift(newColNameArr);
+// }
 
 export function generateColumns(arr) { //生成符合antd的Table组件要求的columns数组
     let columns = [];

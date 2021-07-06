@@ -1,7 +1,6 @@
 import * as tools from "./tools.js"
 
-export default function resloveGrammar() { // 读取文法并解析
-    const originGrammar = document.getElementById('grammarBox').value;
+export default function resloveGrammar(originGrammar) { // 读取文法并解析
     const grammarArr = originGrammar.split('\n').map(item => item.replace(/\s*/g, "")); //去除输入字符串中所有空格后的文法数组
     let grammarOBJ = null;
     if (!isOG(grammarArr)) {
