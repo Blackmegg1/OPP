@@ -26,6 +26,7 @@ export default class App extends Component {
     this.setState({
       originGrammar: this.state.originGrammar,
       grammarOBJ: grammarOBJ,
+      expression: this.state.expression,
     })
   }
 
@@ -34,7 +35,6 @@ export default class App extends Component {
       {
         originGrammar: this.state.originGrammar,
         grammarOBJ: this.state.grammarOBJ,
-        expression: event.target.value,
       }
     )
   }
@@ -64,14 +64,14 @@ export default class App extends Component {
       this.state.grammarOBJ.PRTColumns,
     ]
     const HistoryD = [
-      this.state.grammarOBJ.historyData,
+      this.state.grammarOBJ.historydata,
       this.state.grammarOBJ.historyColumns,
     ]
     return (
       <div>
         <MySider handleChange={this.getOrginGrammar} handleClick={this.resolveGrammar}
           handleChange2={this.getExpression} handleClick2={this.resolveExpression}></MySider>
-        <MyContent FIRSTVTD={FIRSTVTD} LASTVTD={LASTVTD} PRTD={PRTD}></MyContent>
+        <MyContent FIRSTVTD={FIRSTVTD} LASTVTD={LASTVTD} PRTD={PRTD} HistoryD={HistoryD} ></MyContent>
       </div>
     )
   }

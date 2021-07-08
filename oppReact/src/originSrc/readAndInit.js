@@ -1,7 +1,10 @@
 import * as tools from "./tools.js"
 
 export default function resloveGrammar(originGrammar) { // 读取文法并解析
-    const grammarArr = originGrammar.split('\n').map(item => item.replace(/\s*/g, "")); //去除输入字符串中所有空格后的文法数组
+    const grammarArr = originGrammar.split('\n').map(item => item.replace(/\s*/g, "")); //去除输入字符串中所有空格后的文法数组\
+    while(grammarArr[grammarArr.length-1] === "") {
+        grammarArr.pop(); //去除最后的换行
+    }
     let grammarOBJ = null;
     if (!isOG(grammarArr)) {
         return grammarOBJ;

@@ -70,5 +70,5 @@ export default function resolve(grammarOBJ, enter) {
         moves:moves,
     }
     grammarOBJ.history = history;
-    grammarOBJ.historyData = tools.generateHistoryDataSource(history);
+    grammarOBJ.historydata = tools.generateHistoryDataSource(history);
 }

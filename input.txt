@@ -6,5 +6,6 @@ P->(E)|i
 
 
 
-"i+i*i+i"
-"i+(i*i)+i"
+i+i*i+i
+
+i+(i*i)+i

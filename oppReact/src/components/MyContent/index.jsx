@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import FIRSTVT from '../FIRSTVT'
 import LASTVT from '../LASTVT'
 import PRT from '../PRT'
+import History from '../History'
 import "./index.css"
 
 export default class MyContent extends Component {
@@ -12,6 +13,7 @@ export default class MyContent extends Component {
                 <FIRSTVT FIRSTVTD={FIRSTVTD} />
                 <LASTVT LASTVTD={LASTVTD} />
                 <PRT PRTD={PRTD} />
+                <History HistoryD={HistoryD} />
             </div>
         )
     }
