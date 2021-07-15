@@ -9,18 +9,18 @@ export default function generatePRT(grammarOBJ) { //生成优先关系表
         if (len === 1) continue; //跳过右部仅有一个符号的产生式
         for (let i = 0; i < len; i++) {
             if (tools.isVT(gRight[i]) && tools.isVT(gRight[i + 1])) {
-                PRT[findVTindex(gRight[i])][findVTindex(gRight[i + 1])] = "=";
+                PRT[findVTindex(gRight[i])][findVTindex(gRight[i + 1])] = "=";  //均为终结符，值为 =
             }
             if (i <= len - 2 && tools.isVT(gRight[i]) && tools.isVT(gRight[i + 2]) && tools.isVN(gRight[i + 1])) {
-                PRT[findVTindex(gRight[i])][findVTindex(gRight[i + 2])] = "=";
+                PRT[findVTindex(gRight[i])][findVTindex(gRight[i + 2])] = "=";  //xi和xi+2为终结符，xi+1为非终结符，值为 xi = xi+2
             }
             if (tools.isVT(gRight[i]) && tools.isVN(gRight[i + 1])) {
                 for (let index = 0; index < FIRSTVT[findVNindex(gRight[i + 1])].length; index++) {
                     if (FIRSTVT[findVNindex(gRight[i + 1])][index]) {
-                        if (PRT[findVTindex(gRight[i])][index] !== "*") {
+                        if (PRT[findVTindex(gRight[i])][index] !== "*") { 
                             throw new Error("Duplicate priority relationship! The mistake lies in:" + gRight[i] + ":" + VTarr[index]);
                         } //处理冲突的优先关系
-                        PRT[findVTindex(gRight[i])][index] = "<";
+                        PRT[findVTindex(gRight[i])][index] = "<"; //xi为终结符,xi+1为非终结符，xi<FIRSTVT(x+1)
                     }
                 }
             }

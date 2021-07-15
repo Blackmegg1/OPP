@@ -1,4 +1,112 @@
-# OPP
+---
+typora-root-url: imges
+---
+
+# 说明文档
+
+
+
+[TOC]
+
+## 一、功能描述
+
+用户输入任意算符文法G，程序将求出其**FIRSTVT(P)**、**LASTVT(P)**、**优先关系表**并以表格的方式展示在页面上。在求出以上三个表格后，对用户进一步输入的文法输入串，进行算符优先分析，并且展示其“**移进-归约**”过程。
+
+## 二、启动方式
+
+1. 下载该项目release中[build.zip](https://github.com/Blackmegg1/OPP/releases/download/v1.0/build.zip)解压后在该文件夹下运行：`yarn start`，该方式只能展示，代码无法进行二次创作。
+2. 使用git clone本仓库，在oppReact文件夹下运行：`yarn start`，该方式适用于代码二次创作。详细的[文件结构](#stru)见下文。
+
+## 三、效果展示
+
+执行环境：
+
+VSCode v1.58.1
+
+yarn v1.22.10
+
+React v17.0.2
+
+初始页面：
+
+![img1](/img1.png)
+
+用户输入一：
+
+![img2](/img2.png)
+
+用户输入二：
+
+![img3](/img3.png)
+
+## 四、<span id="stru">文件结构</span>
+
+较为关键的目录有三个：
+
+1. 底层逻辑相关，OPP/oppReact/src/orginSrc
+
+| 文件名         | 作用                         |
+| -------------- | ---------------------------- |
+| FIRSTVT.js     | 用于求解文法的FIRSTVT        |
+| LASTVT.js      | ......                       |
+| PRT.js         | 用于求解文法的优先关系表     |
+| index.js       | 主函数，通过它来调用其余模块 |
+| readAndInit.js | 解析用户输入的文法           |
+| resolve.js     | 解析用户输入的表达式         |
+| tools.js       | 各个模块中均使用到的工具模块 |
+
+2. 项目主目录，OPP/oppReact/src
+
+| 文件名      | 作用                                             |
+| ----------- | ------------------------------------------------ |
+| components  | 页面组件                                         |
+| orginSrc    | ......                                           |
+| App.css     | React根组件样式                                  |
+| App.jsx     | React根组件                                      |
+| Tableme.jsx | 一个antd表格的演示组件，重点是传给表格的数据格式 |
+| index.js    | 执行React渲染                                    |
+
+3. 页面组件目录，OPP/oppReact/src/components
+
+| 文件名称    | 对应组件                             |
+| ----------- | ------------------------------------ |
+| Btn         | ”解析文法“按钮                       |
+| Btn2        | "算符优先分析"按钮                   |
+| FIRSTVT     | 展示FIRSTVT的表格                    |
+| LASTVT      | ......                               |
+| PRT         | ......                               |
+| History     | 展示"移进-归约"过程的表格            |
+| MyContent   | 页面右侧区域，包含4张表格            |
+| MySider     | 页面左侧区域，包含2个输入框和2个按钮 |
+| MyTextArea  | 文法输入框                           |
+| MyTextArea2 | 表达式输入框                         |
+
+## 五、改前必看
+
+如果你想使用该项目完成编译原理的实验or设计，请认真阅读本部分。
+
+想看懂本项目的所有代码，你至少需要了解：
+
+1. js的基本语法规则，如变量和一些常用的数组方法。[学习链接](https://zh.javascript.info/array-methods)
+2. 一点点es6中模块化编程的相关知识。[学习链接](https://zh.javascript.info/modules-intro)
+3. 编译原理相关知识。 [课程 P94 - P102](https://www.bilibili.com/video/BV12741147J3?from=search&seid=7727167966753753537)
+
+拥有以上基础，你就可以配合着代码的注释去理解整个项目的底层逻辑部分了，其实十分简单。这里推荐阅读这个无GUI版本的[commit](https://github.com/Blackmegg1/OPP/tree/f3f9d87a6fcf906d17c515a3bd4a1520bc16b5a8)，打开`index.html`，按F12在控制台查看输出。
+
+想要修改本项目的GUI，你至少需要了解：
+
+1. creat-react-app脚手架的文件结构。
+2. React的基本语法和组件间通信方法。[学习链接](https://www.bilibili.com/video/BV1wy4y1D7JT)
+3. 会查阅antd的官方组件文档。[学习链接](https://ant.design/components/overview-cn/)
+
+拥有以上基础，你就可以试着去修改页面了。注意：我的布局写得很差，除非你对你对CSS布局很了解不然不要轻易修改布局。
+
+本项目其实很简单，并没有复杂得逻辑，祝你使用顺利！:congratulations:
+
+最后，附上写本项目的日记：
+
+## 六、项目日记
+
 2021年7月2日，下雨，断断续续写了2天，到目前为止实现了:triangular_flag_on_post::
 
 1. FIRSTVT
@@ -76,7 +184,7 @@
 
 ------
 
-2021年7月10日，晴，今天早起，没有对代码做更改。
+2021年7月10日，晴:sun_with_face:，今天早起，没有对代码做更改。
 
 发布了v1.0，过程比想象中简单很多，由于我用的脚手架直接运行yarn build就可以了。倒是思考了下如何在build文件夹下运行项目，结果只要yarn start就可以了。看来脚手架真的帮我完成了所有工作啊，真的很方便。虽然发布了v1.0但是还有很多改进地空间，比如：
 
