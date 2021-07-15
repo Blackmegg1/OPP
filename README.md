@@ -1,7 +1,3 @@
----
-typora-root-url: imges
----
-
 # 说明文档
 
 
@@ -29,15 +25,15 @@ React v17.0.2
 
 初始页面：
 
-![img1](/img1.png)
+![img1](/imges/img1.png)
 
 用户输入一：
 
-![img2](/img2.png)
+![img2](imges/img2.png)
 
 用户输入二：
 
-![img3](/img3.png)
+![img3](imges/img3.png)
 
 ## 四、<span id="stru">文件结构</span>
 
